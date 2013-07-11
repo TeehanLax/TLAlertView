@@ -21,6 +21,8 @@
 		5E5BD74F178F26F500295698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5BD731178F26F500295698 /* UIKit.framework */; };
 		5E5BD757178F26F500295698 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BD755178F26F500295698 /* InfoPlist.strings */; };
 		5E5BD759178F26F500295698 /* TLAlertViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BD758178F26F500295698 /* TLAlertViewTests.m */; };
+		5E5BD764178F27F700295698 /* TLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BD763178F27F700295698 /* TLAlertView.m */; };
+		5E5BD765178F27F700295698 /* TLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BD763178F27F700295698 /* TLAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		5E5BD754178F26F500295698 /* TLAlertViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TLAlertViewTests-Info.plist"; sourceTree = "<group>"; };
 		5E5BD756178F26F500295698 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5E5BD758178F26F500295698 /* TLAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAlertViewTests.m; sourceTree = "<group>"; };
+		5E5BD762178F27F700295698 /* TLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAlertView.h; sourceTree = "<group>"; };
+		5E5BD763178F27F700295698 /* TLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 		5E5BD721178F26F500295698 = {
 			isa = PBXGroup;
 			children = (
+				5E5BD762178F27F700295698 /* TLAlertView.h */,
+				5E5BD763178F27F700295698 /* TLAlertView.m */,
 				5E5BD733178F26F500295698 /* TLAlertView */,
 				5E5BD752178F26F500295698 /* TLAlertViewTests */,
 				5E5BD72C178F26F500295698 /* Frameworks */,
@@ -253,6 +259,7 @@
 				5E5BD744178F26F500295698 /* TLViewController.m in Sources */,
 				5E5BD73E178F26F500295698 /* TLAppDelegate.m in Sources */,
 				5E5BD73A178F26F500295698 /* main.m in Sources */,
+				5E5BD764178F27F700295698 /* TLAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E5BD759178F26F500295698 /* TLAlertViewTests.m in Sources */,
+				5E5BD765178F27F700295698 /* TLAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +463,7 @@
 				5E5BD75E178F26F500295698 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E5BD75F178F26F500295698 /* Build configuration list for PBXNativeTarget "TLAlertViewTests" */ = {
 			isa = XCConfigurationList;
@@ -463,6 +472,7 @@
 				5E5BD761178F26F500295698 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

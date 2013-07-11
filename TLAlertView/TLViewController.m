@@ -7,6 +7,7 @@
 //
 
 #import "TLViewController.h"
+#import "TLAlertView.h"
 
 @interface TLViewController ()
 
@@ -14,16 +15,12 @@
 
 @implementation TLViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(IBAction)showAlert:(id)sender {
+    TLAlertView *alertView = [[TLAlertView alloc] initWithTitle:@"Title" message:@"Message" buttonTitle:@"OK"];
+    [alertView show];
+    
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Title" message:@"Message" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+//    [alertView show];
 }
 
 @end
