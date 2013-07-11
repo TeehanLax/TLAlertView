@@ -36,7 +36,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZvQ-ly-YTD">
-                                <rect key="frame" x="92" y="452" width="136" height="44"/>
+                                <rect key="frame" x="92" y="466" width="136" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Show System Alert">
@@ -58,6 +58,7 @@
                             <constraint firstItem="MqF-3W-TDL" firstAttribute="top" secondItem="ZvQ-ly-YTD" secondAttribute="bottom" constant="8" symbolic="YES" id="9YJ-da-AzO"/>
                             <constraint firstAttribute="bottom" secondItem="MqF-3W-TDL" secondAttribute="bottom" constant="20" symbolic="YES" id="YJb-G0-jZ4"/>
                             <constraint firstItem="MXk-si-bua" firstAttribute="top" secondItem="MqF-3W-TDL" secondAttribute="bottom" constant="20" id="cnP-ZC-V2P"/>
+                            <constraint firstItem="MqF-3W-TDL" firstAttribute="top" secondItem="ZvQ-ly-YTD" secondAttribute="bottom" constant="8" id="whr-Cx-dy1"/>
                             <constraint firstItem="MqF-3W-TDL" firstAttribute="centerX" secondItem="ZvQ-ly-YTD" secondAttribute="centerX" id="xF2-m5-D6p"/>
                         </constraints>
                     </view>

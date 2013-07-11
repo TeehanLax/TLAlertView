@@ -56,6 +56,7 @@ static const CGFloat buttonHeight = 44.0f;
     
     self.frame = keyWindow.bounds;
     
+    // Set up our subviews
     self.backgroundView = [[UIView alloc] initWithFrame:keyWindow.bounds];
     self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f]; // Determined empirically
     self.backgroundView.alpha = 0.0f;
@@ -110,6 +111,7 @@ static const CGFloat buttonHeight = 44.0f;
 #pragma mark - Public Methods
 
 -(void)show {
+    // Assume the view is offscreen. Use a Snap behaviour to position it in the center of the screen.
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
     
     [keyWindow addSubview:self];
@@ -124,12 +126,11 @@ static const CGFloat buttonHeight = 44.0f;
     snapBehaviour.damping = 0.65f;
     [self.animator addBehavior:snapBehaviour];
     
-    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.alertView]];
-    [self.animator addBehavior:itemBehaviour];
-    
 }
 
 -(void)dismiss {
+    // Assume that the view is currently in the center of the screen. Add some gravity to make it disappear.
+    // It *should* disappear before the animation fading away the background completes.
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
     
     [self.animator removeAllBehaviors];
@@ -142,15 +143,18 @@ static const CGFloat buttonHeight = 44.0f;
     [itemBehaviour addAngularVelocity:-M_PI_2 forItem:self.alertView];
     [self.animator addBehavior:itemBehaviour];
     
+    // Animate out our background blind
     [UIView animateWithDuration:animationDuration animations:^{
         self.backgroundView.alpha = 0.0f;
         keyWindow.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
         [keyWindow tintColorDidChange];
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
+        // Very important!
         self.retainedSelf = nil;
     }];
     
+    // Call our completion handler
     if (self.handler) {
         self.handler(self);
     }
