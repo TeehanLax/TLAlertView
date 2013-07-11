@@ -8,7 +8,7 @@
 
 #import "TLAlertView.h"
 
-static const CGFloat animationDuration = 0.3f;
+static const CGFloat animationDuration = 0.4f;
 static const CGFloat alertViewWidth = 270.0f;
 static const CGFloat buttonHeight = 44.0f;
 
@@ -23,6 +23,8 @@ static const CGFloat buttonHeight = 44.0f;
 
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIView *alertView;
+
+@property (nonatomic, strong) UIDynamicAnimator *animator;
 
 @end
 
@@ -87,7 +89,7 @@ static const CGFloat buttonHeight = 44.0f;
     [self.alertView addSubview:messageLabel];
     
     self.alertView.bounds = CGRectMake(0, 0, alertViewWidth, messageHeight + 44.0f + 45.0f);
-    self.alertView.center = self.center;
+    self.alertView.center = CGPointMake(CGRectGetMidX(keyWindow.bounds), -CGRectGetMaxY(self.alertView.bounds));
     
     CALayer *keylineLayer = [CALayer layer];
     keylineLayer.backgroundColor = [[UIColor colorWithWhite:0.0f alpha:0.29f] CGColor];
@@ -101,8 +103,12 @@ static const CGFloat buttonHeight = 44.0f;
     [button addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView addSubview:button];
     
+    // Adjust our keyWindow's tint adjustment mode to make everything behind the alert view dimmed
     keyWindow.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     [keyWindow tintColorDidChange];
+    
+    // Set up our UIKit Dynamics
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self];
 }
 
 #pragma mark - Public Methods
@@ -112,13 +118,33 @@ static const CGFloat buttonHeight = 44.0f;
     
     [keyWindow addSubview:self];
     
+    // Animate in the background blind
     [UIView animateWithDuration:animationDuration animations:^{
         self.backgroundView.alpha = 1.0f;
     }];
+    
+    // Use UIKit Dynamics to make the alertView appear.
+    UISnapBehavior *snapBehaviour = [[UISnapBehavior alloc] initWithItem:self.alertView snapToPoint:keyWindow.center];
+    snapBehaviour.damping = 0.65f;
+    [self.animator addBehavior:snapBehaviour];
+    
+    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.alertView]];
+    [self.animator addBehavior:itemBehaviour];
+    
 }
 
 -(void)dismiss {
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    
+    [self.animator removeAllBehaviors];
+    
+    UIGravityBehavior *gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:@[self.alertView]];
+    [gravityBehaviour setXComponent:0.0f yComponent:10.0f];
+    [self.animator addBehavior:gravityBehaviour];
+    
+    UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.alertView]];
+    [itemBehaviour addAngularVelocity:-M_PI_2 forItem:self.alertView];
+    [self.animator addBehavior:itemBehaviour];
     
     [UIView animateWithDuration:animationDuration animations:^{
         self.backgroundView.alpha = 0.0f;
