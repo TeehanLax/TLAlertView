@@ -76,19 +76,15 @@ static const CGFloat buttonHeight = 44.0f;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.alertView addSubview:titleLabel];
     
-    UIFont *messageFont = [UIFont systemFontOfSize:17];
-    CGRect boundingMessageRect = [self.message boundingRectWithSize:CGSizeMake(alertViewWidth, 999) options:0 attributes:@{NSFontAttributeName: messageFont} context:nil];
-    CGFloat messageHeight = MAX(CGRectGetHeight(boundingMessageRect), 44.0f);
-    
-    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, alertViewWidth, messageHeight)];
+    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, alertViewWidth, 44.0f)];
     messageLabel.text = self.message;
     messageLabel.backgroundColor = [UIColor clearColor];
     messageLabel.textColor = [UIColor blackColor];
-    messageLabel.font = messageFont;
+    messageLabel.font = [UIFont systemFontOfSize:17];
     messageLabel.textAlignment = NSTextAlignmentCenter;
     [self.alertView addSubview:messageLabel];
     
-    self.alertView.bounds = CGRectMake(0, 0, alertViewWidth, messageHeight + 44.0f + 45.0f);
+    self.alertView.bounds = CGRectMake(0, 0, alertViewWidth, 44.0f + 44.0f + 45.0f);
     self.alertView.center = CGPointMake(CGRectGetMidX(keyWindow.bounds), -CGRectGetMaxY(self.alertView.bounds));
     
     CALayer *keylineLayer = [CALayer layer];
