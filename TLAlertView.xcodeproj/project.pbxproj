@@ -23,6 +23,7 @@
 		5E5BD759178F26F500295698 /* TLAlertViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BD758178F26F500295698 /* TLAlertViewTests.m */; };
 		5E5BD764178F27F700295698 /* TLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BD763178F27F700295698 /* TLAlertView.m */; };
 		5E5BD765178F27F700295698 /* TLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BD763178F27F700295698 /* TLAlertView.m */; };
+		5E5BD767178F2C7E00295698 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5BD766178F2C7E00295698 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		5E5BD758178F26F500295698 /* TLAlertViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TLAlertViewTests.m; sourceTree = "<group>"; };
 		5E5BD762178F27F700295698 /* TLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAlertView.h; sourceTree = "<group>"; };
 		5E5BD763178F27F700295698 /* TLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAlertView.m; sourceTree = "<group>"; };
+		5E5BD766178F2C7E00295698 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E5BD767178F2C7E00295698 /* QuartzCore.framework in Frameworks */,
 				5E5BD730178F26F500295698 /* CoreGraphics.framework in Frameworks */,
 				5E5BD732178F26F500295698 /* UIKit.framework in Frameworks */,
 				5E5BD72E178F26F500295698 /* Foundation.framework in Frameworks */,
@@ -107,6 +110,7 @@
 		5E5BD72C178F26F500295698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E5BD766178F2C7E00295698 /* QuartzCore.framework */,
 				5E5BD72D178F26F500295698 /* Foundation.framework */,
 				5E5BD72F178F26F500295698 /* CoreGraphics.framework */,
 				5E5BD731178F26F500295698 /* UIKit.framework */,

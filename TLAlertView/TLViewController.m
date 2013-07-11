@@ -15,12 +15,14 @@
 
 @implementation TLViewController
 
+-(IBAction)showSystemAlert:(id)sender {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Title" message:@"Message" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+    [alertView show];
+}
+
 -(IBAction)showAlert:(id)sender {
     TLAlertView *alertView = [[TLAlertView alloc] initWithTitle:@"Title" message:@"Message" buttonTitle:@"OK"];
     [alertView show];
-    
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Title" message:@"Message" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-//    [alertView show];
 }
 
 @end

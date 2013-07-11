@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 Teehan+Lax. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import QuartzCore;
 
 @class TLAlertView;
 
