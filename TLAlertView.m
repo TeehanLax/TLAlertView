@@ -136,7 +136,7 @@ static const CGFloat buttonHeight = 44.0f;
     [self.animator removeAllBehaviors];
     
     UIGravityBehavior *gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:@[self.alertView]];
-    gravityBehaviour.gravityDirection = CGSizeMake(0.0f, 10.0f);
+    gravityBehaviour.gravityDirection = CGVectorMake(0.0f, 10.0f);
     [self.animator addBehavior:gravityBehaviour];
     
     UIDynamicItemBehavior *itemBehaviour = [[UIDynamicItemBehavior alloc] initWithItems:@[self.alertView]];
