@@ -25,7 +25,7 @@ static const CGFloat separatorEachEle   = 10.0f;
 
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIView *alertView;
-@property (nonatomic, strong) UIView *innherView;
+@property (nonatomic, strong) UIView *innerView;
 
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 
@@ -83,25 +83,25 @@ static const CGFloat separatorEachEle   = 10.0f;
     self.alertView.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
     [self.alertView setTag:1];
     
-    self.innherView = [[UIView alloc] initWithFrame:self.alertView.frame];
-    [self.innherView setBackgroundColor:[UIColor clearColor]];
-    [self.innherView setTag:2];
+    self.innerView = [[UIView alloc] initWithFrame:self.alertView.frame];
+    [self.innerView setBackgroundColor:[UIColor clearColor]];
+    [self.innerView setTag:2];
     
-    [self.alertView addSubview:self.innherView];
+    [self.alertView addSubview:self.innerView];
     [self addSubview:self.alertView];
     
     // Add Title
-    [self.innherView addSubview:[self returnUIForTitle]];
+    [self.innerView addSubview:[self returnUIForTitle]];
     
     // Add Messsage
-    [self.innherView addSubview:[self returnUIForMessage]];
+    [self.innerView addSubview:[self returnUIForMessage]];
     
     // Configure AlertView
     self.alertView.bounds = CGRectMake(0, 0, alertViewWidth, 44.0f + 44.0f + 45.0f);
     self.alertView.center = CGPointMake(CGRectGetMidX(keyWindow.bounds), - CGRectGetMaxY(self.alertView.bounds));
     
     // Add Button
-    [self.innherView addSubview:[self returnUIForButton]];
+    [self.innerView addSubview:[self returnUIForButton]];
     
     // Add layer to AlertView
     [self.alertView.layer addSublayer:[self subLayerLine]];
@@ -267,7 +267,7 @@ static const CGFloat separatorEachEle   = 10.0f;
 - (CGRect)frameForLastSettedView
 {
     CGRect frame;
-    NSArray *subviews = [self.innherView subviews];
+    NSArray *subviews = [self.innerView subviews];
     if([subviews count] > 0){
         UIView *t_View = [subviews objectAtIndex:[subviews count]-1];
         frame = CGRectMake(t_View.frame.origin.x, t_View.frame.origin.y, t_View.frame.size.width, t_View.frame.size.height);
@@ -281,7 +281,7 @@ static const CGFloat separatorEachEle   = 10.0f;
     CGFloat totalHeight = 0.0f;
     
     // GET ALL SUBVIEWS (height)
-    for(UIView *i_views in [self.innherView subviews]){
+    for(UIView *i_views in [self.innerView subviews]){
         totalHeight += i_views.frame.size.height;
     }
     
@@ -299,7 +299,7 @@ static const CGFloat separatorEachEle   = 10.0f;
         
     }
     
-    [self.innherView setFrame:CGRectMake(
+    [self.innerView setFrame:CGRectMake(
                                          0 + marginInnerView,
                                          0 + marginInnerView,
                                          self.alertView.frame.size.width - marginInnerView*2,
