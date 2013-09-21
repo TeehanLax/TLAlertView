@@ -20,6 +20,7 @@ typedef void(^TLAlertViewHandler)(TLAlertView *alertView);
 @property (nonatomic, readonly) NSString *buttonTitle;
 
 -(instancetype)initWithTitle:(NSString *)title message:(NSString *)message buttonTitle:(NSString *)buttonTitle;
+-(instancetype)initWithTitle:(NSString *)title message:(NSString *)message buttonTitle:(NSString *)buttonTitle outsideClose: (BOOL)tap2close;
 -(instancetype)initWithTitle:(NSString *)title message:(NSString *)message buttonTitle:(NSString *)buttonTitle handler:(TLAlertViewHandler)handler;
 
 -(void)show;
