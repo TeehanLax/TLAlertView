@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A972E54181598AC000FFF89 /* TLDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A972E52181598AC000FFF89 /* TLDemoViewController.m */; };
+		2A972E55181598AC000FFF89 /* TLDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A972E53181598AC000FFF89 /* TLDemoViewController.xib */; };
 		5E5BD72E178F26F500295698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5BD72D178F26F500295698 /* Foundation.framework */; };
 		5E5BD730178F26F500295698 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5BD72F178F26F500295698 /* CoreGraphics.framework */; };
 		5E5BD732178F26F500295698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5BD731178F26F500295698 /* UIKit.framework */; };
@@ -37,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A972E51181598AC000FFF89 /* TLDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLDemoViewController.h; sourceTree = "<group>"; };
+		2A972E52181598AC000FFF89 /* TLDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLDemoViewController.m; sourceTree = "<group>"; };
+		2A972E53181598AC000FFF89 /* TLDemoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TLDemoViewController.xib; sourceTree = "<group>"; };
 		5E5BD72A178F26F500295698 /* TLAlertView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLAlertView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5BD72D178F26F500295698 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5E5BD72F178F26F500295698 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -127,6 +132,9 @@
 				5E5BD73F178F26F500295698 /* Main.storyboard */,
 				5E5BD742178F26F500295698 /* TLViewController.h */,
 				5E5BD743178F26F500295698 /* TLViewController.m */,
+				2A972E51181598AC000FFF89 /* TLDemoViewController.h */,
+				2A972E52181598AC000FFF89 /* TLDemoViewController.m */,
+				2A972E53181598AC000FFF89 /* TLDemoViewController.xib */,
 				5E5BD745178F26F500295698 /* Images.xcassets */,
 				5E5BD734178F26F500295698 /* Supporting Files */,
 			);
@@ -240,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E5BD746178F26F500295698 /* Images.xcassets in Resources */,
+				2A972E55181598AC000FFF89 /* TLDemoViewController.xib in Resources */,
 				5E5BD738178F26F500295698 /* InfoPlist.strings in Resources */,
 				5E5BD741178F26F500295698 /* Main.storyboard in Resources */,
 			);
@@ -260,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A972E54181598AC000FFF89 /* TLDemoViewController.m in Sources */,
 				5E5BD744178F26F500295698 /* TLViewController.m in Sources */,
 				5E5BD73E178F26F500295698 /* TLAppDelegate.m in Sources */,
 				5E5BD73A178F26F500295698 /* main.m in Sources */,
