@@ -8,6 +8,7 @@
 
 #import "TLViewController.h"
 #import "TLAlertView.h"
+#import "TLDemoViewController.h"
 
 @interface TLViewController ()
 
@@ -22,6 +23,12 @@
 
 -(IBAction)showAlert:(id)sender {
     TLAlertView *alertView = [[TLAlertView alloc] initWithTitle:@"Title" message:@"Message" buttonTitle:@"OK"];
+    [alertView show];
+}
+
+-(IBAction)showAlertCustomView:(id)sender {
+    TLDemoViewController *demoVC = [[TLDemoViewController alloc] initWithNibName:@"TLDemoViewController" bundle:[NSBundle mainBundle]];
+    TLAlertView *alertView = [[TLAlertView alloc] initWithView:demoVC.view outsideClose:YES];
     [alertView show];
 }
 

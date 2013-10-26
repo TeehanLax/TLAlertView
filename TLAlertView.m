@@ -16,9 +16,10 @@ static const CGFloat separatorEachEle   = 10.0f;
 
 @interface TLAlertView ()
 
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *message;
-@property (nonatomic, strong) NSString *buttonTitle;
+@property (nonatomic, strong) NSString  *title;
+@property (nonatomic, strong) NSString  *message;
+@property (nonatomic, strong) NSString  *buttonTitle;
+@property (nonatomic, strong) UIView    *customAlertView;
 
 @property (nonatomic, copy) TLAlertViewHandler handler;
 @property (nonatomic, strong) TLAlertView *retainedSelf;
@@ -60,7 +61,91 @@ static const CGFloat separatorEachEle   = 10.0f;
     return self;
 }
 
+-(instancetype)initWithView:(UIView *)view
+{
+    return [self initWithView:view handler:nil];
+}
+
+-(instancetype)initWithView:(UIView *)view outsideClose: (BOOL)tap2close
+{
+    self.tap2close = tap2close;
+    return [self initWithView:view handler:nil];
+}
+
+-(instancetype)initWithView:(UIView *)view handler:(TLAlertViewHandler)handler
+{
+    if (!(self = [super init])) return nil;
+    
+    self.title = nil;
+    self.message = nil;
+    self.buttonTitle = @"Close";
+    self.handler = handler;
+    self.customAlertView = view;
+    
+    [self setupCustomView];
+    
+    return self;
+}
+
 #pragma mark - Private Methods
+
+- (void)setupCustomView
+{
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    
+    self.frame = keyWindow.bounds;
+    
+    // Set up our subviews
+    self.backgroundView                 = [[UIView alloc] initWithFrame:keyWindow.bounds];
+    self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.4f]; // Determined empirically
+    self.backgroundView.alpha           = 0.0f;
+    [self addSubview:self.backgroundView];
+    
+    //////////////////////////////////////////
+    // AlertView it self
+    //////////////////////////////////////////
+    self.alertView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, alertViewWidth, 100)];
+    self.alertView.backgroundColor = [UIColor redColor];
+    self.alertView.layer.cornerRadius = 11.0f;
+    self.alertView.layer.masksToBounds = YES;
+    self.alertView.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
+    [self.alertView setTag:1];
+    
+    self.innerView = [[UIView alloc] initWithFrame:self.alertView.frame];
+    [self.innerView setBackgroundColor:[UIColor clearColor]];
+    [self.innerView setTag:2];
+    
+    [self.alertView addSubview:self.innerView];
+    [self addSubview:self.alertView];
+    
+    // Add Custom View
+    [self.innerView addSubview:[self returnUIForCustomView]];
+    
+    // Configure AlertView
+    self.alertView.bounds = CGRectMake(0, 0, alertViewWidth, 44.0f + 44.0f + 45.0f);
+    self.alertView.center = CGPointMake(CGRectGetMidX(keyWindow.bounds), - CGRectGetMaxY(self.alertView.bounds));
+    
+    // Add Button
+    [self.innerView addSubview:[self returnUIForButton]];
+    
+    // Add layer to AlertView
+    [self.alertView.layer addSublayer:[self subLayerLine]];
+    
+    // Resize all subviews
+    [self AMResizeViewsWithCustomView];
+    
+    // Adjust our keyWindow's tint adjustment mode to make everything behind the alert view dimmed
+    keyWindow.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
+    [keyWindow tintColorDidChange];
+    
+    // Set up our UIKit Dynamics
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self];
+    
+    // add custom gestures.
+    if(self.tap2close == YES){
+        [self setupGestures];
+    }
+}
 
 -(void)setup {
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
@@ -176,15 +261,25 @@ static const CGFloat separatorEachEle   = 10.0f;
 
 #pragma mark - UI stuff
 
+- (UIView *)returnUIForCustomView
+{
+    return self.customAlertView;
+}
+
 - (CALayer *)subLayerLine
 {
     CGRect lastFrame = [self frameForLastSettedView];
+    
+    CGFloat posYLine = lastFrame.origin.y;
+    if(nil == self.customAlertView){
+        posYLine += separatorEachEle;
+    }
     
     CALayer *keylineLayer = [CALayer layer];
     keylineLayer.backgroundColor = [[UIColor colorWithWhite:0.0f alpha:0.29f] CGColor];
     keylineLayer.frame = CGRectMake(
                                     0,
-                                    lastFrame.origin.y + separatorEachEle,
+                                    posYLine,
                                     alertViewWidth,
                                     0.5f);
     
@@ -236,14 +331,13 @@ static const CGFloat separatorEachEle   = 10.0f;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setTitle:self.buttonTitle forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont boldSystemFontOfSize:button.titleLabel.font.pointSize];
-    [button setBackgroundColor:[UIColor clearColor]];
+    [button setBackgroundColor:[UIColor whiteColor]];
     button.frame = CGRectMake(
                               0 - marginInnerView,
                               lastFrame.origin.y + lastFrame.size.height + separatorEachEle,
                               alertViewWidth,
                               44.0f);
     [button addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    
     return button;
 }
 
@@ -308,6 +402,49 @@ static const CGFloat separatorEachEle   = 10.0f;
     
     
     
+}
+
+- (void)AMResizeViewsWithCustomView
+{
+    CGRect frameCustomAlert = self.customAlertView.frame;
+    
+    [self.alertView setFrame:CGRectMake(0,//self.alertView.frame.origin.x,
+                                        0,//self.alertView.frame.origin.y,
+                                        frameCustomAlert.size.width, //frame3.size.width,
+                                        frameCustomAlert.size.height)];
+    
+    [self.innerView setFrame:CGRectMake(0, //self.innerView.frame.origin.x,
+                                        0, //self.innerView.frame.origin.y,
+                                        frameCustomAlert.size.width, //frame.size.width,
+                                        frameCustomAlert.size.height)];
+    
+    [self.customAlertView setFrame:frameCustomAlert];
+    
+    // If we add a CancelButton
+    CGFloat totalHeight = 0.0f;
+    
+    // GET ALL SUBVIEWS (height)
+    for(UIView *i_views in [self.innerView subviews]){
+        totalHeight += i_views.frame.size.height;
+    }
+    
+    // ADD separatorEachEle to totalHeight value
+    totalHeight+=separatorEachEle;
+    
+    if(totalHeight>0){
+        // Finally, calculate frame of AlertView
+        [self.alertView setFrame:CGRectMake(
+                                            self.alertView.frame.origin.x,
+                                            self.alertView.frame.origin.y,
+                                            self.alertView.frame.size.width,
+                                            totalHeight
+                                            )];
+        [self.innerView setFrame:CGRectMake(0, //self.innerView.frame.origin.x,
+                                            0, //self.innerView.frame.origin.y,
+                                            frameCustomAlert.size.width, //frame.size.width,
+                                            totalHeight)];
+        
+    }
 }
 
 #pragma mark - gesture actions
