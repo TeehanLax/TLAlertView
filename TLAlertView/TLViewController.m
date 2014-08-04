@@ -12,6 +12,8 @@
 
 @interface TLViewController ()
 
+@property (nonatomic, strong) id ownedViewController;
+
 @end
 
 @implementation TLViewController
@@ -30,6 +32,7 @@
     TLDemoViewController *demoVC = [[TLDemoViewController alloc] initWithNibName:@"TLDemoViewController" bundle:[NSBundle mainBundle]];
     TLAlertView *alertView = [[TLAlertView alloc] initWithView:demoVC.view outsideClose:YES];
     [alertView show];
+    self.ownedViewController = demoVC;
 }
 
 @end
